@@ -1,6 +1,8 @@
 import logo from '../../assets/img/logo/logo-cdn-sercotec.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark, faLock } from '@fortawesome/free-solid-svg-icons';
 
-const Navbar = () => {
+const Navbar = ({ adminMode, setAdminMode }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top" aria-label="Navegación principal">
       <div className="container">
@@ -23,6 +25,15 @@ const Navbar = () => {
             <li className="nav-item"><a className="nav-link" href="#aboutUs">Nosotros</a></li>
             <li className="nav-item"><a className="nav-link" href="#services">Servicios</a></li>
             <li className="nav-item"><a className="nav-link" href="#contact">Contacto</a></li>
+            <li className="nav-item ms-lg-2" style={{ marginTop: '0.4rem' }}>
+              <a href='#admin-cms'><button
+                className={`btn btn-sm fw-bold ${adminMode ? 'btn-danger' : 'btn-outline-warning text-dark'}`}
+                onClick={() => setAdminMode(!adminMode)}
+              >
+                <FontAwesomeIcon icon={adminMode ? faXmark : faLock} className="me-1" />
+                {adminMode ? 'Salir Admin' : 'Panel Admin'}
+              </button></a>
+            </li>
           </ul>
         </div>
       </div>
