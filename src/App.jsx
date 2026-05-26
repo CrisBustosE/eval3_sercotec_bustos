@@ -17,12 +17,27 @@ const App = () => {
   // Modo admin para habilitar el AdminCMS
   const [adminMode, setAdminMode] = useState(false);
   useEffect(() => {
-    // Aplicamos un smooth para cualquier redirección dentro de la página, además un espacio para que el navbar se desplace lo suficiente para no tapar contenido
+    const navbarElement = document.querySelector('.navbar');
+    if (!navbarElement) return;
+
+    const updateScrollPadding = () => {
+      // Ajusta dinámicamente el espacio según la altura real y actual del Navbar
+      document.documentElement.style.scrollPaddingTop = `${navbarElement.offsetHeight}px`;
+    };
+
     document.documentElement.style.scrollBehavior = 'smooth';
-    document.documentElement.style.scrollPaddingTop = '13.625rem'; // Altura del navbar
 
+    // ResizeObserver: Observa cambios físicos en el elemento, incluyendo animaciones de apertura/cierre
+    const resizeObserver = new ResizeObserver(() => {
+      updateScrollPadding();
+    });
 
-  }, []);
+    // Ponemos al observador a vigilar exclusivamente al Navbar
+    resizeObserver.observe(navbarElement);
+
+    // Limpieza de memoria
+    return () => resizeObserver.disconnect();
+  }, [adminMode]); // Cada vez que adminMode cambie, se recalculará la altura automáticamente
 
 
 
@@ -47,9 +62,9 @@ const App = () => {
 
         {/* Pasamos los servicios,setServices, testimonials y setTestimonials para que el CMS pueda modificarlos */}
         {adminMode && (
-          <AdminCMS 
-            services={services} 
-            setServices={setServices} 
+          <AdminCMS
+            services={services}
+            setServices={setServices}
             testimonials={testimonials} // A implementar
             setTestimonials={setTestimonials}
           />
