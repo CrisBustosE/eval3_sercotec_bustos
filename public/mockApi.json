@@ -1,0 +1,85 @@
+{
+  "services": [
+    {
+      "id": 1,
+      "title": "Acompañamiento Preventivo",
+      "description": "Prolonga la vida útil de tu negocio y aumenta tu productividad mediante asesorías periódicas enfocadas en la sostenibilidad.",
+      "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 2,
+      "title": "Acompañamiento Correctivo",
+      "description": "Resolvemos cualquier dificultad o desafío que afecte la gestión o el desarrollo de tu empresa con planes de mejora.",
+      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": 3,
+      "title": "Marketing Digital e Innovación",
+      "description": "Te apoyamos en la incorporación de herramientas digitales, capacitación y optimización de procesos para tu crecimiento.",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "aboutUs": {
+    "mision": "Ofrecer servicios integrales de apoyo a las micro, pequeñas y medianas empresas con un enfoque especializado en gestión e innovación.",
+    "vision": "Garantizar el correcto funcionamiento, eficiencia y networking de los negocios locales en Santiago."
+  },
+  "faq": [
+    {
+      "id": 1,
+      "question": "¿Tiene algún costo la asesoría?",
+      "answer": "No, todos los servicios del Centro de Negocios SERCOTEC son completamente gratuitos para los emprendedores y pymes."
+    },
+    {
+      "id": 2,
+      "question": "¿Dónde están ubicados?",
+      "answer": "Nuestra oficina principal se encuentra en Manuel Rodríguez Sur 749, Santiago (Metro Toesca)."
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "María Juana Pérez",
+      "business": "Verdulería Del Monte",
+      "region": "Región Metropolitana (Santiago)",
+      "text": "Gracias al fondo Capital Abeja de Sercotec, pudimos modernizar nuestro local con nuevas balanzas digitales y vitrinas refrigeradas que mantienen las verduras frescas por más tiempo.",
+      "imageUrl": "https://images.unsplash.com/photo-1743807059766-9d3ca4f35b60?auto=format&fit=crop&w=600&q=80",
+      "imageAlt": "María Juana Pérez sonriendo con un delantal en su puesto de venta de verduras frescas."
+    },
+    {
+      "id": 2,
+      "name": "Jacinto Villagrán",
+      "business": "Alfarería Villagrán",
+      "region": "Región Metropolitana (Pomaire, Melipilla)",
+      "text": "El programa Crece nos permitió construir un nuevo horno de alta eficiencia en Pomaire. Así duplicamos la producción de nuestras gredas tradicionales sin perder la esencia artesanal.",
+      "imageUrl": "https://images.unsplash.com/photo-1753164726626-e4c38056a03f?auto=format&fit=crop&w=600&q=80",
+      "imageAlt": "Jacinto Villagrán sonriendo orgullosamente en su taller de alfarería tradicional en Pomaire."
+    },
+    {
+      "id": 3,
+      "name": "Claudio Espinoza",
+      "business": "Vulcanizadora Portales",
+      "region": "Región Metropolitana (Estación Central)",
+      "text": "Postulé a Sercotec y con el subsidio compramos una desmontadora de neumáticos automática que transformó por completo la velocidad de atención de la vulcanizadora.",
+      "imageUrl": "https://images.unsplash.com/photo-1545262722-9e0d80a0bc01?auto=format&fit=crop&w=600&q=80",
+      "imageAlt": "Claudio Espinoza contento en su taller mecánico posando junto a las herramientas de trabajo."
+    },
+    {
+      "id": 4,
+      "name": "Enrique Beltrán",
+      "business": "Artesanía en Cuero Beltrán",
+      "region": "Región Metropolitana (Santiago Centro)",
+      "text": "El financiamiento no solo nos dio materias primas de mejor calidad, sino también asesoría en marketing digital a través del Centro de Negocios Sercotec para empezar a vender a todo Chile.",
+      "imageUrl": "https://images.unsplash.com/photo-1561111777-1525a4700c3d?auto=format&fit=crop&w=600&q=80",
+      "imageAlt": "Enrique Beltrán demostrando sus habilidades y concentrado en la confección de una pieza de cuero en su taller."
+    },
+    {
+      "id": 5,
+      "name": "Néstor Riquelme",
+      "business": "Costurería Don Néstor",
+      "region": "Región Metropolitana (Independencia)",
+      "text": "Comenzamos como un pequeño taller en casa. Con el apoyo de Sercotec adquirimos máquinas de coser industriales y modernas, lo que nos permitió formalizarnos y tomar pedidos de empresas.",
+      "imageUrl": "https://images.unsplash.com/photo-1662767784042-8f5c958cc405?auto=format&fit=crop&w=600&q=80",
+      "imageAlt": "Néstor Riquelme concentrado frente a una máquina de coser industrial en su taller de costuras y arreglos."
+    }
+  ]
+}
