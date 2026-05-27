@@ -5,8 +5,10 @@ import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import Footer from './components/Footer/Footer';
 import ServicesSection from './components/ServicesSection/ServicesSection';
+import Testimonials from './components/Testimonials/Testimonials';
 import useMockApi from './hooks/useMockApi'; //Import de la ruta de nuestro fetch de mockApi
 import AdminCMS from './components/AdminCMS/AdminCMS';
+
 
 const App = () => {
   // Consumo único de nuestra mockApi para rellenar tarjetas y ruleta
@@ -60,6 +62,8 @@ const App = () => {
           services={services}
           onServiceSelect={handleContactClick} />
 
+
+        <Testimonials testimonials={testimonials} />
         {/* Pasamos los servicios,setServices, testimonials y setTestimonials para que el CMS pueda modificarlos */}
         {adminMode && (
           <AdminCMS

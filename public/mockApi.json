@@ -38,12 +38,12 @@
   "testimonials": [
     {
       "id": 1,
-      "name": "María Juana Pérez",
-      "business": "Verdulería Del Monte",
-      "region": "Región Metropolitana (Santiago)",
-      "text": "Gracias al fondo Capital Abeja de Sercotec, pudimos modernizar nuestro local con nuevas balanzas digitales y vitrinas refrigeradas que mantienen las verduras frescas por más tiempo.",
-      "imageUrl": "https://images.unsplash.com/photo-1743807059766-9d3ca4f35b60?auto=format&fit=crop&w=600&q=80",
-      "imageAlt": "María Juana Pérez sonriendo con un delantal en su puesto de venta de verduras frescas."
+      "name": "Carlos Tapia",
+      "business": "Amasandería y Dulces El Sol",
+      "region": "Región Metropolitana (Peñalolén)",
+      "text": "Gracias al fondo Crece de Sercotec pudimos renovar nuestras vitrinas y mejorar la exhibición de nuestra repostería. El acompañamiento del centro de negocios ha sido fundamental.",
+      "imageUrl": "https://images.unsplash.com/photo-1768167444750-c77555cf5db8?auto=format&fit=crop&w=600&q=80",
+      "imageAlt": "Carlos Tapia sonriendo y dando pulgar arriba en su amasandería."
     },
     {
       "id": 2,
@@ -60,8 +60,8 @@
       "business": "Vulcanizadora Portales",
       "region": "Región Metropolitana (Estación Central)",
       "text": "Postulé a Sercotec y con el subsidio compramos una desmontadora de neumáticos automática que transformó por completo la velocidad de atención de la vulcanizadora.",
-      "imageUrl": "https://images.unsplash.com/photo-1545262722-9e0d80a0bc01?auto=format&fit=crop&w=600&q=80",
-      "imageAlt": "Claudio Espinoza contento en su taller mecánico posando junto a las herramientas de trabajo."
+      "imageUrl": "https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=600&q=80",
+      "imageAlt": "Claudio Espinoza demostrando su habilidad en su taller mecánico."
     },
     {
       "id": 4,
@@ -69,7 +69,7 @@
       "business": "Artesanía en Cuero Beltrán",
       "region": "Región Metropolitana (Santiago Centro)",
       "text": "El financiamiento no solo nos dio materias primas de mejor calidad, sino también asesoría en marketing digital a través del Centro de Negocios Sercotec para empezar a vender a todo Chile.",
-      "imageUrl": "https://images.unsplash.com/photo-1561111777-1525a4700c3d?auto=format&fit=crop&w=600&q=80",
+      "imageUrl": "https://images.unsplash.com/photo-1607969891567-463aef4c9ddc?auto=format&fit=crop&w=600&q=80",
       "imageAlt": "Enrique Beltrán demostrando sus habilidades y concentrado en la confección de una pieza de cuero en su taller."
     },
     {
