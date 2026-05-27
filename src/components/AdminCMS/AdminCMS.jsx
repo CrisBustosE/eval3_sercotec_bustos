@@ -128,17 +128,30 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
 
     return (
         <section className="container my-5 p-4 bg-white rounded shadow border border-warning" id="admin-cms">
-            <div className="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
-                <h3 className="fw-bold text-warning mb-0"><FontAwesomeIcon icon={faSliders} className="me-2" />Panel de Administración (CMS)</h3>
-                <div className="d-flex align-items-center gap-3">
-                    {/* Botón de Reseteo */}
-                    <button className="btn btn-sm btn-outline-danger fw-bold" onClick={triggerFactoryReset} title="Restaurar datos originales">
-                        <FontAwesomeIcon icon={faRotateLeft} className="me-1" /> Resetear Datos
+            {/* Cabecera Responsiva: Apilada en móviles, en fila en Desktop */}
+            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center border-bottom pb-3 mb-4 gap-3">
+
+                <h3 className="fw-bold text-warning mb-0 text-center text-md-start">
+                    <FontAwesomeIcon icon={faSliders} className="me-2" />Panel de Administración
+                </h3>
+
+                {/* Contenedor de botones 100% fluido */}
+                <div className="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2 w-100 w-md-auto">
+
+                    <button className="btn btn-sm btn-outline-danger fw-bold w-100 w-sm-auto mb-2 mb-sm-0" onClick={triggerFactoryReset} title="Restaurar datos originales">
+                        <FontAwesomeIcon icon={faRotateLeft} className="me-1" /> Resetear
                     </button>
-                    <div className="btn-group" role="group">
-                        <button className={`btn btn-sm ${activeTab === 'services' ? 'btn-warning' : 'btn-outline-warning text-dark'}`} onClick={() => { setActiveTab('services'); setServiceForm({ title: '', description: '', image: '' }); setEditingServiceId(null); }}>Servicios</button>
-                        <button className={`btn btn-sm ${activeTab === 'testimonials' ? 'btn-warning' : 'btn-outline-warning text-dark'}`} onClick={() => { setActiveTab('testimonials'); setTestimonialForm({ name: '', business: '', text: '', imageUrl: '' }); setEditingTestimonialId(null); }}>Testimonios</button>
+
+                    {/* Reemplazamos el btn-group por un d-flex flexible */}
+                    <div className="d-flex gap-2 w-100 w-sm-auto">
+                        <button className={`btn btn-sm flex-grow-1 ${activeTab === 'services' ? 'btn-warning' : 'btn-outline-warning text-dark'}`} onClick={() => { setActiveTab('services'); setServiceForm({ title: '', description: '', image: '' }); setEditingServiceId(null); }}>
+                            Servicios
+                        </button>
+                        <button className={`btn btn-sm flex-grow-1 ${activeTab === 'testimonials' ? 'btn-warning' : 'btn-outline-warning text-dark'}`} onClick={() => { setActiveTab('testimonials'); setTestimonialForm({ name: '', business: '', text: '', imageUrl: '' }); setEditingTestimonialId(null); }}>
+                            Testimonios
+                        </button>
                     </div>
+
                 </div>
             </div>
 
