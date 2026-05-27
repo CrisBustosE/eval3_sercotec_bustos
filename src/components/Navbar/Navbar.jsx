@@ -18,7 +18,7 @@ const Navbar = ({ adminMode, setAdminMode }) => {
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top" aria-label="Navegación principal">
       <div className="container">
         {/* Usamos el nombre del cliente real */}
-        <a className="navbar-brand fw-bold d-flex align-items-center" href="#"><img
+        <a className="navbar-brand fw-bold d-flex align-items-center" href="#home"><img
           src={logo}
           alt="Logo Centro de Negocios Sercotec"
           style={{ maxHeight: '3rem', width: 'auto' }}
