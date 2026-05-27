@@ -45,17 +45,17 @@ const Testimonials = ({ testimonials }) => {
             {testimonials.map((t, index) => (
               <div key={t.id} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
                 <div className="row g-0 align-items-center">
-
+                {/* Columna imagenes */}
                   <div className="col-12 col-md-5 col-lg-4">
                     <img
                       src={t.imageUrl}
-                      className="w-100"
+                      className="w-100 rounded ms-2"
                       alt={t.imageAlt || `Fotografía de ${t.name}`}
                       style={{ objectFit: 'cover', height: '25rem' }}
                     />
                   </div>
-
-                  <div className="col-12 col-md-7 col-lg-8 p-4 p-md-5 pb-5">
+                {/* Columna de texto */}
+                  <div className="col-12 col-md-7 col-lg-8 px-5 py-4 p-md-5 pb-5">
                     <div className="d-flex flex-column justify-content-center h-100" style={{ minHeight: '22rem' }}>
                       <FontAwesomeIcon icon={faQuoteLeft} className="text-warning mb-3 opacity-50" size="2x" />
                       <p className="lead fst-italic text-secondary mb-4" style={{ fontSize: '1.15rem' }}>
@@ -76,13 +76,22 @@ const Testimonials = ({ testimonials }) => {
               </div>
             ))}
           </div>
-
-          <button className="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev" style={{ width: '5%' }}>
-            <span className="carousel-control-prev-icon bg-primary rounded-circle p-3 shadow" aria-hidden="true"></span>
+            {/* Botones slider */}
+          <button className="carousel-control-prev" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="prev" style={{ width: '3rem' }}>
+            <span 
+              className="carousel-control-prev-icon bg-primary rounded-circle shadow flex-shrink-0" 
+              aria-hidden="true" 
+              style={{ width: '2.75rem', height: '2.75rem' }}
+            ></span>
             <span className="visually-hidden">Anterior</span>
           </button>
-          <button className="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next" style={{ width: '5%' }}>
-            <span className="carousel-control-next-icon bg-primary rounded-circle p-3 shadow" aria-hidden="true"></span>
+          
+          <button className="carousel-control-next" type="button" data-bs-target="#testimonialsCarousel" data-bs-slide="next" style={{ width: '3rem' }}>
+            <span 
+              className="carousel-control-next-icon bg-primary rounded-circle shadow flex-shrink-0" 
+              aria-hidden="true" 
+              style={{ width: '2.75rem', height: '2.75rem' }}
+            ></span>
             <span className="visually-hidden">Siguiente</span>
           </button>
 
