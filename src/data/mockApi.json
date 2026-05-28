@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Acompañamiento Preventivo",
       "description": "Prolonga la vida útil de tu negocio y aumenta tu productividad mediante asesorías periódicas enfocadas en la sostenibilidad.",
-      "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+      "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80&"
     },
     {
       "id": 2,
@@ -33,6 +33,16 @@
       "id": 2,
       "question": "¿Dónde están ubicados?",
       "answer": "Nuestra oficina principal se encuentra en Manuel Rodríguez Sur 749, Santiago (Metro Toesca)."
+    },
+    {
+      "id": 3,
+      "question": "¿Necesito tener mi empresa formalizada (con inicio de actividades) para recibir ayuda?",
+      "answer": "No es estrictamente necesario. Atendemos tanto a empresas formalizadas que buscan crecer, como a emprendedores que tienen una idea de negocio y buscan orientación para formalizarse."
+    },
+    {
+      "id": 4,
+      "question": "¿Cómo puedo agendar mi primera asesoría?",
+      "answer": "Puedes utilizar el formulario de contacto que se encuentra más abajo en esta página, o acercarte directamente a nuestra sucursal."
     }
   ],
   "testimonials": [
@@ -40,7 +50,7 @@
       "id": 1,
       "name": "Carlos Tapia",
       "business": "Amasandería y Dulces El Sol",
-      "region": "Región Metropolitana (Peñalolén)",
+      "location": "Región Metropolitana (Peñalolén)",
       "text": "Gracias al fondo Crece de Sercotec pudimos renovar nuestras vitrinas y mejorar la exhibición de nuestra repostería. El acompañamiento del centro de negocios ha sido fundamental.",
       "imageUrl": "https://images.unsplash.com/photo-1768167444750-c77555cf5db8?auto=format&fit=crop&w=600&q=80",
       "imageAlt": "Carlos Tapia sonriendo y dando pulgar arriba en su amasandería."
@@ -49,7 +59,7 @@
       "id": 2,
       "name": "Jacinto Villagrán",
       "business": "Alfarería Villagrán",
-      "region": "Región Metropolitana (Pomaire, Melipilla)",
+      "location": "Región Metropolitana (Pomaire, Melipilla)",
       "text": "El programa Crece nos permitió construir un nuevo horno de alta eficiencia en Pomaire. Así duplicamos la producción de nuestras gredas tradicionales sin perder la esencia artesanal.",
       "imageUrl": "https://images.unsplash.com/photo-1753164726626-e4c38056a03f?auto=format&fit=crop&w=600&q=80",
       "imageAlt": "Jacinto Villagrán sonriendo orgullosamente en su taller de alfarería tradicional en Pomaire."
@@ -58,7 +68,7 @@
       "id": 3,
       "name": "Claudio Espinoza",
       "business": "Vulcanizadora Portales",
-      "region": "Región Metropolitana (Estación Central)",
+      "location": "Región Metropolitana (Estación Central)",
       "text": "Postulé a Sercotec y con el subsidio compramos una desmontadora de neumáticos automática que transformó por completo la velocidad de atención de la vulcanizadora.",
       "imageUrl": "https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=600&q=80",
       "imageAlt": "Claudio Espinoza demostrando su habilidad en su taller mecánico."
@@ -67,7 +77,7 @@
       "id": 4,
       "name": "Enrique Beltrán",
       "business": "Artesanía en Cuero Beltrán",
-      "region": "Región Metropolitana (Santiago Centro)",
+      "location": "Región Metropolitana (Santiago Centro)",
       "text": "El financiamiento no solo nos dio materias primas de mejor calidad, sino también asesoría en marketing digital a través del Centro de Negocios Sercotec para empezar a vender a todo Chile.",
       "imageUrl": "https://images.unsplash.com/photo-1607969891567-463aef4c9ddc?auto=format&fit=crop&w=600&q=80",
       "imageAlt": "Enrique Beltrán demostrando sus habilidades y concentrado en la confección de una pieza de cuero en su taller."
@@ -76,7 +86,7 @@
       "id": 5,
       "name": "Néstor Riquelme",
       "business": "Costurería Don Néstor",
-      "region": "Región Metropolitana (Independencia)",
+      "location": "Región Metropolitana (Independencia)",
       "text": "Comenzamos como un pequeño taller en casa. Con el apoyo de Sercotec adquirimos máquinas de coser industriales y modernas, lo que nos permitió formalizarnos y tomar pedidos de empresas.",
       "imageUrl": "https://images.unsplash.com/photo-1662767784042-8f5c958cc405?auto=format&fit=crop&w=600&q=80",
       "imageAlt": "Néstor Riquelme concentrado frente a una máquina de coser industrial en su taller de costuras y arreglos."
