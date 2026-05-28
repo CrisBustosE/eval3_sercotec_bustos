@@ -3,37 +3,34 @@ import CustomModal from '../CustomModal/CustomModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan, faPencil, faPlus, faSliders, faRotateLeft } from '@fortawesome/free-solid-svg-icons';
 
+// ==========================================
+// Panel CMS (Requerimiento 3)
+// ==========================================
 const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
     const [activeTab, setActiveTab] = useState('services');
 
-    // Estados para los formularios
     const [serviceForm, setServiceForm] = useState({ title: '', description: '', image: '' });
-    const [testimonialForm, setTestimonialForm] = useState({ name: '', business: '', text: '', imageUrl: '' });
+    const [testimonialForm, setTestimonialForm] = useState({ name: '', business: '', text: '', imageUrl: '', location: '' });
 
-    // Estados para controlar la MODIFICACIÓN (Guardan el ID del elemento que se está editando)
     const [editingServiceId, setEditingServiceId] = useState(null);
     const [editingTestimonialId, setEditingTestimonialId] = useState(null);
 
-    // Configuraciones para los modales de respuesta
     const [modalConfig, setModalConfig] = useState({ show: false, title: '', message: '' });
     const [confirmConfig, setConfirmConfig] = useState({ show: false, title: '', message: '', onConfirm: null });
 
-    // Manejadores de entrada comunes
     const handleServiceChange = (e) => setServiceForm({ ...serviceForm, [e.target.name]: e.target.value });
     const handleTestimonialChange = (e) => setTestimonialForm({ ...testimonialForm, [e.target.name]: e.target.value });
 
-    // ================= SECCIÓN: SERVICIOS (CREATE & UPDATE) =================
+    // ================= SECCIÓN: SERVICIOS =================
     const handleServiceSubmit = (e) => {
         e.preventDefault();
         let updated;
 
         if (editingServiceId) {
-            // OPERACIÓN: MODIFICAR (Update)
             updated = services.map(s => s.id === editingServiceId ? { ...s, ...serviceForm } : s);
-            setEditingServiceId(null); // Apagamos el modo edición
+            setEditingServiceId(null);
             setModalConfig({ show: true, title: '¡Servicio Actualizado!', message: 'Los cambios se han guardado de forma exitosa.' });
         } else {
-            // OPERACIÓN: CREAR (Create)
             const newId = services.length > 0 ? Math.max(...services.map(s => s.id)) + 1 : 1;
             updated = [...services, { id: newId, ...serviceForm }];
             setModalConfig({ show: true, title: '¡Servicio Publicado!', message: 'El servicio ya se encuentra disponible en la landing page.' });
@@ -44,13 +41,11 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
         setServiceForm({ title: '', description: '', image: '' });
     };
 
-    // Activa el formulario en modo edición para Servicios
     const startEditService = (service) => {
         setEditingServiceId(service.id);
         setServiceForm({ title: service.title, description: service.description, image: service.image });
     };
 
-    // OPERACIÓN: QUITAR (Delete) usando nuestro Modal Reutilizable
     const triggerDeleteService = (id, title) => {
         setConfirmConfig({
             show: true,
@@ -65,31 +60,64 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
         });
     };
 
-    // ================= SECCIÓN: TESTIMONIOS (CREATE & UPDATE) =================
+    // ================= SECCIÓN: TESTIMONIOS =================
     const handleTestimonialSubmit = (e) => {
         e.preventDefault();
         let updated;
 
+        // 1. Armamos el string oficial SIEMPRE, ya sea para crear o editar
+        const locationInput = testimonialForm.location.trim();
+        const locationFinal = locationInput !== '' 
+            ? `Región Metropolitana (${locationInput})` 
+            : 'Región Metropolitana (Santiago)';
+
+        // 2. Creamos un objeto con los datos finales listos para guardar
+        const finalTestimonialData = {
+            ...testimonialForm,
+            location: locationFinal
+        };
+
         if (editingTestimonialId) {
-            // OPERACIÓN: MODIFICAR (Update)
-            updated = testimonials.map(t => t.id === editingTestimonialId ? { ...t, ...testimonialForm } : t);
+            // Actualizamos inyectando la data formateada
+            updated = testimonials.map(t => t.id === editingTestimonialId ? { ...t, ...finalTestimonialData } : t);
             setEditingTestimonialId(null);
             setModalConfig({ show: true, title: '¡Testimonio Modificado!', message: 'El testimonio ha sido actualizado con éxito.' });
         } else {
-            // OPERACIÓN: CREAR (Create)
             const newId = testimonials.length > 0 ? Math.max(...testimonials.map(t => t.id)) + 1 : 1;
-            updated = [...testimonials, { id: newId, ...testimonialForm, region: 'Región Metropolitana', imageAlt: `Foto de ${testimonialForm.name}` }];
+            // Creamos inyectando la data formateada
+            updated = [...testimonials, { id: newId, ...finalTestimonialData, imageAlt: `Foto de ${testimonialForm.name}` }];
             setModalConfig({ show: true, title: '¡Testimonio Añadido!', message: 'El testimonio se ha incorporado al carrusel de clientes.' });
         }
 
         setTestimonials(updated);
         localStorage.setItem('sercotec_testimonials', JSON.stringify(updated));
-        setTestimonialForm({ name: '', business: '', text: '', imageUrl: '' });
+        // Reseteamos el formulario
+        setTestimonialForm({ name: '', business: '', text: '', imageUrl: '', location: '' });
     };
 
     const startEditTestimonial = (t) => {
         setEditingTestimonialId(t.id);
-        setTestimonialForm({ name: t.name, business: t.business, text: t.text, imageUrl: t.imageUrl });
+        
+        let savedLocation = '';
+        
+        // Si tiene location y tiene paréntesis, extraemos lo de adentro
+        if (t.location && t.location.includes('(')) {
+            savedLocation = t.location.split('(')[1].replace(')', '');
+            
+            // UX Tweak: Si el valor interno era "Santiago" (el default), 
+            // lo dejamos vacío para que el formulario se vea más limpio.
+            if (savedLocation === 'Santiago') {
+                savedLocation = '';
+            }
+        }
+
+        setTestimonialForm({ 
+            name: t.name, 
+            business: t.business, 
+            text: t.text, 
+            imageUrl: t.imageUrl, 
+            location: savedLocation 
+        });
     };
 
     const triggerDeleteTestimonial = (id, name) => {
@@ -106,21 +134,16 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
         });
     };
 
-    // ================= FUNCIÓN: RESETEO DE FÁBRICA =================
+    // ================= RESETEO DE FÁBRICA =================
     const triggerFactoryReset = () => {
         setConfirmConfig({
             show: true,
             title: '¿Resetear Datos de Fábrica?',
             message: 'Esto eliminará todos los cambios realizados y restaurará los servicios y testimonios originales del sistema. La página se recargará. ¿Deseas continuar?',
             onConfirm: () => {
-                // Borramos los datos locales
                 localStorage.removeItem('sercotec_services');
                 localStorage.removeItem('sercotec_testimonials');
-
-                // Forzamos la url a apuntar a la id del hero (que parta desde el comienzo de la página)
                 window.location.hash = 'home';
-
-                // Recargamos la página para forzar el fetch al JSON original
                 window.location.reload();
             }
         });
@@ -128,30 +151,22 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
 
     return (
         <section className="container my-5 p-4 bg-white rounded shadow border border-warning" id="admin-cms">
-            {/* Cabecera Responsiva: Apilada en móviles, en fila en Desktop */}
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center border-bottom pb-3 mb-4 gap-3">
-
                 <h3 className="fw-bold text-warning mb-0 text-center text-md-start">
                     <FontAwesomeIcon icon={faSliders} className="me-2" />Panel de Administración
                 </h3>
-
-                {/* Contenedor de botones 100% fluido */}
                 <div className="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2 w-100 w-md-auto">
-
                     <button className="btn btn-sm btn-outline-danger fw-bold w-100 w-sm-auto mb-2 mb-sm-0" onClick={triggerFactoryReset} title="Restaurar datos originales">
                         <FontAwesomeIcon icon={faRotateLeft} className="me-1" /> Resetear
                     </button>
-
-                    {/* Reemplazamos el btn-group por un d-flex flexible */}
                     <div className="d-flex gap-2 w-100 w-sm-auto">
                         <button className={`btn btn-sm flex-grow-1 ${activeTab === 'services' ? 'btn-warning' : 'btn-outline-warning text-dark'}`} onClick={() => { setActiveTab('services'); setServiceForm({ title: '', description: '', image: '' }); setEditingServiceId(null); }}>
                             Servicios
                         </button>
-                        <button className={`btn btn-sm flex-grow-1 ${activeTab === 'testimonials' ? 'btn-warning' : 'btn-outline-warning text-dark'}`} onClick={() => { setActiveTab('testimonials'); setTestimonialForm({ name: '', business: '', text: '', imageUrl: '' }); setEditingTestimonialId(null); }}>
+                        <button className={`btn btn-sm flex-grow-1 ${activeTab === 'testimonials' ? 'btn-warning' : 'btn-outline-warning text-dark'}`} onClick={() => { setActiveTab('testimonials'); setTestimonialForm({ name: '', business: '', text: '', imageUrl: '', location: '' }); setEditingTestimonialId(null); }}>
                             Testimonios
                         </button>
                     </div>
-
                 </div>
             </div>
 
@@ -161,15 +176,9 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
                         <div className="card p-3 bg-light border-0 shadow-sm">
                             <h5 className="fw-bold text-secondary mb-3">
                                 {editingServiceId ? (
-                                    <>
-                                        <FontAwesomeIcon icon={faPencil} className="me-2 text-primary" />
-                                        Modificar Servicio
-                                    </>
+                                    <><FontAwesomeIcon icon={faPencil} className="me-2 text-primary" /> Modificar Servicio</>
                                 ) : (
-                                    <>
-                                        <FontAwesomeIcon icon={faPlus} className="me-2 text-success" />
-                                        Nuevo Servicio
-                                    </>
+                                    <><FontAwesomeIcon icon={faPlus} className="me-2 text-success" /> Nuevo Servicio</>
                                 )}
                             </h5>
                             <form onSubmit={handleServiceSubmit}>
@@ -228,15 +237,9 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
                         <div className="card p-3 bg-light border-0 shadow-sm">
                             <h5 className="fw-bold text-secondary mb-3">
                                 {editingTestimonialId ? (
-                                    <>
-                                        <FontAwesomeIcon icon={faPencil} className="me-2 text-primary" />
-                                        Modificar Testimonio
-                                    </>
+                                    <><FontAwesomeIcon icon={faPencil} className="me-2 text-primary" /> Modificar Testimonio</>
                                 ) : (
-                                    <>
-                                        <FontAwesomeIcon icon={faPlus} className="me-2 text-success" />
-                                        Nuevo Testimonio
-                                    </>
+                                    <><FontAwesomeIcon icon={faPlus} className="me-2 text-success" /> Nuevo Testimonio</>
                                 )}
                             </h5>
                             <form onSubmit={handleTestimonialSubmit}>
@@ -245,8 +248,13 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
                                     <input type="text" className="form-control form-control-sm" name="name" value={testimonialForm.name} onChange={handleTestimonialChange} required placeholder="Ej: Juan Perez" />
                                 </div>
                                 <div className="mb-2">
-                                    <label className="form-label small fw-bold">Empresa/Pyme</label>
+                                    <label className="form-label small fw-bold">Empresa/PYME</label>
                                     <input type="text" className="form-control form-control-sm" name="business" value={testimonialForm.business} onChange={handleTestimonialChange} required placeholder="Ej: Juanito Soluciones" />
+                                </div>
+                                {/* Input de Comuna/Localidad */}
+                                <div className="mb-2">
+                                    <label className="form-label small fw-bold">Comuna/Localidad <span className="text-muted fw-normal">(Opcional - Por defecto: Santiago)</span></label>
+                                    <input type="text" className="form-control form-control-sm" name="location" value={testimonialForm.location} onChange={handleTestimonialChange} placeholder="Ej: Macul, Providencia (Vacío para Santiago)..." />
                                 </div>
                                 <div className="mb-2">
                                     <label className="form-label small fw-bold">URL Foto</label>
@@ -261,7 +269,7 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
                                         {editingTestimonialId ? 'Guardar Cambios' : 'Agregar Testimonio'}
                                     </button>
                                     {editingTestimonialId && (
-                                        <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => { setEditingTestimonialId(null); setTestimonialForm({ name: '', business: '', text: '', imageUrl: '' }); }}>Cancelar</button>
+                                        <button type="button" className="btn btn-sm btn-outline-secondary" onClick={() => { setEditingTestimonialId(null); setTestimonialForm({ name: '', business: '', text: '', imageUrl: '', location: '' }); }}>Cancelar</button>
                                     )}
                                 </div>
                             </form>
@@ -283,7 +291,9 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
                                         <tr key={t.id} className={editingTestimonialId === t.id ? 'table-warning' : ''}>
                                             <td>
                                                 <div className="fw-bold">{t.name}</div>
-                                                <small className="text-muted">{t.business}</small>
+                                                <small className="text-muted d-block">{t.business}</small>
+                                                {/* Mostramos la región en azulito para el admin */}
+                                                <small className="text-info fw-semibold">{t.location}</small>
                                             </td>
                                             <td className="text-end px-3">
                                                 <button className="btn btn-outline-primary btn-sm py-0 px-2 me-2" onClick={() => startEditTestimonial(t)} title="Editar"><FontAwesomeIcon icon={faPenToSquare} /></button>
@@ -298,7 +308,6 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
                 </div>
             )}
 
-            {/* Modal de Feedback (Éxito) */}
             <CustomModal
                 show={modalConfig.show}
                 title={modalConfig.title}
@@ -307,13 +316,11 @@ const AdminCMS = ({ services, setServices, testimonials, setTestimonials }) => {
                 onClose={() => setModalConfig({ ...modalConfig, show: false })}
             />
 
-            {/* Modal de Confirmación (Peligro/Eliminar/Resetear) */}
             <CustomModal
                 show={confirmConfig.show}
                 title={confirmConfig.title}
                 message={confirmConfig.message}
                 type="danger"
-                // Aquí podemos usar la flexibilidad del botón de acción
                 confirmText={confirmConfig.title.includes('Resetear') ? 'Sí, resetear' : 'Eliminar'}
                 onConfirm={confirmConfig.onConfirm}
                 onClose={() => setConfirmConfig({ ...confirmConfig, show: false })}

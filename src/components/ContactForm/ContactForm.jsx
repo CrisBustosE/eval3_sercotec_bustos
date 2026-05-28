@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import CustomModal from '../CustomModal/CustomModal';
 
 // Recibimos services por props para que el select sea dinámico
 const ContactForm = ({ chosenService, services = [] }) => {
-  const [formData, setFormData] = useState({ name: '', email: '', service: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', service: '', message: '', bot_field:'' });
   
   // Estado para controlar nuestro CustomModal de éxito
   const [modalConfig, setModalConfig] = useState({ show: false, title: '', message: '' });
@@ -21,6 +21,28 @@ const ContactForm = ({ chosenService, services = [] }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // ==========================================
+    // MEDIDAS DE SEGURIDAD (Requerimiento 10)
+    // ==========================================
+
+    // 1. Protección contra bots (Honeypot)
+    if (formData.bot_field !== '') {
+      console.warn("Envío bloqueado: Actividad de bot detectada.");
+      return; // Abortamos silenciosamente, el bot creerá que funcionó
+    }
+
+    // 2. Validación "del lado del servidor" (Simulada)
+    // Nos aseguramos que no se salten el HTML inyectando datos vacíos
+    if (formData.name.trim().length < 3 || !formData.email.includes('@') || formData.message.trim().length < 10) {
+      setModalConfig({
+        show: true,
+        title: 'Error de Validación',
+        message: 'Por favor, asegúrate de ingresar un nombre válido y un mensaje detallado.',
+        type: 'danger'
+      });
+      return;
+    }
     
     // Dejamos evidencia de que se recibieron los datos exitosamente
     console.log("Datos enviados de manera exitosa:", formData);
@@ -33,7 +55,7 @@ const ContactForm = ({ chosenService, services = [] }) => {
     });
 
     // Limpiamos el formulario
-    setFormData({ name: '', email: '', service: '', message: '' });
+    setFormData({ name: '', email: '', service: '', message: '', bot_field: '' });
   };
 
   return (
@@ -46,6 +68,18 @@ const ContactForm = ({ chosenService, services = [] }) => {
               <p className="text-center text-muted mb-4">Déjanos tus datos y te ayudaremos a potenciar tu negocio.</p>
 
               <form onSubmit={handleSubmit}>
+
+                {/* HONEYPOT - INVISIBLE PARA HUMANOS */}
+                <input 
+                  type="text" 
+                  name="bot_field" 
+                  value={formData.bot_field} 
+                  onChange={handleChange} 
+                  style={{ display: 'none' }} 
+                  tabIndex="-1" 
+                  autoComplete="off" 
+                />
+                
                 <div className="row g-3">
                   {/* Campo: Nombre */}
                   <div className="col-12 col-md-6">
@@ -77,7 +111,7 @@ const ContactForm = ({ chosenService, services = [] }) => {
                   {/* Campo: Mensaje */}
                   <div className="col-12">
                     <label htmlFor="message" className="form-label fw-semibold small text-secondary">¿En qué podemos ayudarte?</label>
-                    <textarea className="form-control" id="message" name="message" rows="4" value={formData.message} onChange={handleChange} required placeholder="Cuéntanos un poco sobre tu pyme..."></textarea>
+                    <textarea className="form-control" id="message" name="message" rows="4" value={formData.message} onChange={handleChange} minLength="10" required placeholder="Cuéntanos un poco sobre tu PYME..."></textarea>
                   </div>
 
                   <div className="col-12 mt-4">

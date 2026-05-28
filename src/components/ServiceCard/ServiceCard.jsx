@@ -7,6 +7,7 @@ const ServiceCard = ({ image, title, description, onContactClick }) => {
           className="card-img-top"
           alt={`Imagen representativa del servicio: ${title}`}
           style={{ height: '12.5rem', objectFit: 'cover' }}
+          loading="lazy"
         />
         <div className="card-body d-flex flex-column">
           <h5 className="card-title fw-bold text-primary">{title}</h5>
