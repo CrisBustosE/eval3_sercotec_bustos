@@ -84,7 +84,7 @@ const ContactForm = ({ chosenService, services = [] }) => {
                   {/* Campo: Nombre */}
                   <div className="col-12 col-md-6">
                     <label htmlFor="name" className="form-label fw-semibold small text-secondary">Nombre Completo</label>
-                    <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="Ej: Juan Pérez" />
+                    <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="Ej: Juan Pérez" minLength="3"/>
                   </div>
 
                   {/* Campo: Correo */}
